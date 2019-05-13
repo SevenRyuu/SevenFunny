@@ -5,8 +5,8 @@
     </div>
     <div class="nav">
       <ul>
-        <li><a href="" class="nav-tag">首页</a></li>
-        <li><a href="" class="nav-tag">最新</a></li>
+        <li><a href="" >首页</a></li>
+        <li><a href="" >最新</a></li>
       </ul>
     </div>
     <div class="pro">
@@ -27,15 +27,32 @@ export default {
 <style lang="stylus" scoped>
   @import '~styles/varibles.styl'
   .header
-    line-height: $headerHeight
+    position: fixed
+    display: flex
     background: $bgColor
+    width: 100%
+    height: 4.2rem
+    font-size: 1.4rem
+    align-items: center
     .logo
-      margin-left: 5rem
-      font-size: 1.3rem
+      flex:1
+      .back-icon
+        text-align: right
+        margin-right: 3rem
+        font-size: 3rem
     .nav
-      .nav-tag
-        color: #fff
-
+      flex:2
+      li
+        display: inline
+        padding: 0 1.5rem
+    .pro
+      flex:1
+      li
+        display: inline
+        padding: 0 1.5rem
+          
+    ul li a
+      color: #fff
 </style>
 
 
