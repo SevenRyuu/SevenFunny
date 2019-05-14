@@ -1,7 +1,11 @@
 <template>
   <div class="header">
     <div class="logo">
-      <div class="iconfont back-icon">&#xe612;</div>
+      <div class="back-icon">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#iconmagnet"></use>
+        </svg>
+      </div>
     </div>
     <div class="nav">
       <ul>
