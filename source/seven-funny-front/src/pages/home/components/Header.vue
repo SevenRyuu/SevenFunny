@@ -32,6 +32,7 @@ export default {
   @import '~styles/varibles.styl'
   .header
     position: fixed
+    top: 0
     display: flex
     background: $bgColor
     width: 100%
