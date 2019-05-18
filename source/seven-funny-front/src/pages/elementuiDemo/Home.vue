@@ -4,7 +4,9 @@
     <el-container>
       <el-header>Header</el-header>
       <el-container>
-        <el-aside width="200px">Aside</el-aside>
+        <el-aside width="200px">
+          <nav-menu></nav-menu>
+        </el-aside>
         <el-main>Main</el-main>
       </el-container>
     </el-container>
@@ -13,9 +15,12 @@
 </template>
 
 <script>
-
+import NavMenu from '@/pages/elementuiDemo/components/NavMenu'
 export default {
-  name: 'HelloWorld'
+  name: 'ElHome',
+  components: {
+    NavMenu
+  }
 }
 
 </script>
@@ -23,8 +28,3 @@ export default {
 <style>
 
 </style>
-#!/bin/bash
-
-rm "/Users/$(whoami)/Library/Application Support/Beyond Compare/registry.dat"
-
-"`dirname "$0"`"/BCompare.real $@

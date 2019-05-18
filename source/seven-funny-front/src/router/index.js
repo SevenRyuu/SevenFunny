@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Home from '@/pages/home/Home'
+import ElHome from '@/pages/elementuiDemo/Home'
 Vue.use(Router)
 
 export default new Router({
@@ -14,6 +15,10 @@ export default new Router({
       path: '/old',
       name: 'HelloWorld',
       component: HelloWorld
+    }, {
+      path: '/el',
+      name: 'ElHome',
+      component: ElHome
     }
   ]
 })
