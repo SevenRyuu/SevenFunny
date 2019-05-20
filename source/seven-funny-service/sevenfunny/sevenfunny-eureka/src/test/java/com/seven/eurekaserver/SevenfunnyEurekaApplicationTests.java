@@ -1,4 +1,4 @@
-package com.seven.sevenfunny_eureka;
+package com.seven.eurekaserver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

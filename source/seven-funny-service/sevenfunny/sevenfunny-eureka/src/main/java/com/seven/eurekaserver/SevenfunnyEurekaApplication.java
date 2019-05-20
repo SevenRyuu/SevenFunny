@@ -1,4 +1,4 @@
-package com.seven.sevenfunny_eureka;
+package com.seven.eurekaserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
