@@ -5,6 +5,17 @@ spring:
   application:
     name: sevenfunny-user
 
+#####################################################################################################
+# mysql 属性配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.13.200:3306/sevenfunny_user?useUnicode=true&autoReconnect=true&characterEncoding=utf8&useSSL=true
+    username: root
+    password: 123456
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.seven.user.entity
+#####################################################################################################
 eureka:
   client:
     serviceUrl:
