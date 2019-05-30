@@ -1,4 +1,4 @@
-package com.seven.util;
+package com.seven.common.entity.util;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;

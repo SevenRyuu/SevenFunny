@@ -4,8 +4,20 @@
 
     <select id="selectByPrimaryKey" resultType="com.seven.user.entity.UserInfo">
         select
-          *
+             id
+            ,mobile
+            ,password
+            ,nickname
+            ,gender
+            ,birthday
+            ,email
+            ,avatar
+            ,intro
+            ,reg_dt
+            ,upd_dt
+            ,last_dt
         from sf_user_info
+        where id = #{id}
     </select>
 
     <insert id="insertUserInfo" parameterType="com.seven.user.entity.UserInfo">

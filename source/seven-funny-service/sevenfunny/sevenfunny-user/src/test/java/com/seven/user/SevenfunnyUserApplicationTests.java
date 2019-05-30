@@ -23,7 +23,7 @@ public class SevenfunnyUserApplicationTests {
     public void contextLoads() {
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void testSelect() {
         List<UserInfo> uis = userInfoMapper.selectByPrimaryKey();
@@ -32,17 +32,17 @@ public class SevenfunnyUserApplicationTests {
         });
 
 
-        /*UserInfo ui = userInfoMapper.selectByPrimaryKey();
-        System.out.println("昵称：" + ui.getNickname());*/
-    }
+        *//*UserInfo ui = userInfoMapper.selectByPrimaryKey();
+        System.out.println("昵称：" + ui.getNickname());*//*
+    }*/
 
-    @Test
+    /*@Test
     @Transactional
     @Rollback(value = false)
     public void testInsert() {
         UserInfo userInfo = new UserInfo();
         userInfo.setId("7");
         userInfoMapper.insertUserInfo(userInfo);
-    }
+    }*/
 
 }

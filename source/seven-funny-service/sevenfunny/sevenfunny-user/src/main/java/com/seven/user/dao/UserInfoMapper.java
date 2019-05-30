@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface UserInfoMapper {
 
-    List<UserInfo> selectByPrimaryKey();
+    UserInfo selectByPrimaryKey(String id);
 
     void insertUserInfo(UserInfo userInfo);
 }

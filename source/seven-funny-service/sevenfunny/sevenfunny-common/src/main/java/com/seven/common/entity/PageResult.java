@@ -1,4 +1,4 @@
-package com.seven.entity;
+package com.seven.common.entity;
 
 import java.util.List;
 
