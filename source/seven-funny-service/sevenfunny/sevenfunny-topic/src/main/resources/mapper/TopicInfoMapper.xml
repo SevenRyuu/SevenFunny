@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.topic.dao.TopicInfoMapper">
+
+    <select id="selectByPrimaryKey" resultType="com.seven.topic.entity.TopicInfo">
+        select
+             id
+            ,title
+            ,content
+            ,label
+            ,visit_cnt
+            ,reply_cnt
+            ,reg_id
+            ,reg_dt
+            ,upd_id
+            ,upd_dt
+        from sf_topic_info
+        where id = #{id}
+    </select>
+
+    <insert id="insertTopicInfo" parameterType="com.seven.topic.entity.TopicInfo">
+    insert into sf_topic_info (
+             id
+            ,title
+            ,content
+            ,label
+            ,visit_cnt
+            ,reply_cnt
+            ,reg_id
+            ,reg_dt
+            ,upd_id
+            ,upd_dt
+      )
+    values (
+             #{id}
+            ,#{title}
+            ,#{content}
+            ,#{label}
+            ,0
+            ,0
+            ,#{reg_id}
+            ,SYSDATE()
+            ,#{upd_id}
+            ,SYSDATE()
+      )
+  </insert>
+
+</mapper>

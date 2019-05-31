@@ -45,7 +45,7 @@
         ,#{email}
         ,#{avatar}
         ,#{intro}
-        ,#{reg_dt}
+        ,SYSDATE()
         ,#{upd_dt}
         ,SYSDATE()
       )
