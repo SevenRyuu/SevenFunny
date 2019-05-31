@@ -10,6 +10,8 @@
     <modules>
         <module>sevenfunny-eureka</module>
         <module>sevenfunny-common</module>
+        <module>sevenfunny-user</module>
+        <module>sevenfunny-topic</module>
     </modules>
     <packaging>pom</packaging>
 
