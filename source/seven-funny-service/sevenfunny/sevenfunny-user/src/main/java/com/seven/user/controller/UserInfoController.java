@@ -5,10 +5,9 @@ import com.seven.common.entity.ResultResponse;
 import com.seven.user.entity.UserInfo;
 import com.seven.user.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLOutput;
 
 /**
  * @author ：SevenRyuu

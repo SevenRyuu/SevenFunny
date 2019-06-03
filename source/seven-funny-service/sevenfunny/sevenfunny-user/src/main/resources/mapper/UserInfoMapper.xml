@@ -66,7 +66,7 @@
         ,#{avatar}
         ,#{intro}
         ,SYSDATE()
-        ,#{id}
+        ,SYSDATE()
         ,SYSDATE()
       )
   </insert>
