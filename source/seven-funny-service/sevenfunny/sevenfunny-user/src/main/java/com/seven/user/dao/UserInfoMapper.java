@@ -13,5 +13,7 @@ public interface UserInfoMapper {
 
     UserInfo selectByPrimaryKey(String id);
 
+    UserInfo findByMobileAndPassword(String mobile, String password);
+
     void insertUserInfo(UserInfo userInfo);
 }

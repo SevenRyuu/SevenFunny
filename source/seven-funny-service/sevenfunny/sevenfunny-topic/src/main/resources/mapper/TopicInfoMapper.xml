@@ -18,8 +18,26 @@
         where id = #{id}
     </select>
 
+    <select id="findLatestTopics" resultType="com.seven.topic.entity.TopicInfo">
+        select /获取最新话题/
+             id
+            ,title
+            ,content
+            ,label
+            ,visit_cnt
+            ,reply_cnt
+            ,reg_id
+            ,reg_dt
+            ,upd_id
+            ,upd_dt
+        from sf_topic_info
+        order by upd_dt desc
+        limit 10
+    </select>
+
     <insert id="insertTopicInfo" parameterType="com.seven.topic.entity.TopicInfo">
-    insert into sf_topic_info (
+    insert  /*创建话题*/
+    into sf_topic_info (
              id
             ,title
             ,content

@@ -3,7 +3,7 @@
 <mapper namespace="com.seven.user.dao.UserInfoMapper">
 
     <select id="selectByPrimaryKey" resultType="com.seven.user.entity.UserInfo">
-        select
+        select  /*根据id获取用户信息*/
              id
             ,mobile
             ,password
@@ -20,8 +20,28 @@
         where id = #{id}
     </select>
 
+    <select id="findByMobileAndPassword" resultType="com.seven.user.entity.UserInfo">
+        select  /* 通过手机号和密码获取用户信息*/
+             id
+            ,mobile
+            ,password
+            ,nickname
+            ,gender
+            ,birthday
+            ,email
+            ,avatar
+            ,intro
+            ,reg_dt
+            ,upd_dt
+            ,last_dt
+        from sf_user_info
+        where mobile = #{mobile}
+          and password = #{password}
+    </select>
+
     <insert id="insertUserInfo" parameterType="com.seven.user.entity.UserInfo">
-    insert into sf_user_info (
+    insert  /*增加用户信息*/
+    into sf_user_info (
          id
         ,mobile
         ,password
@@ -46,7 +66,7 @@
         ,#{avatar}
         ,#{intro}
         ,SYSDATE()
-        ,#{upd_dt}
+        ,#{id}
         ,SYSDATE()
       )
   </insert>

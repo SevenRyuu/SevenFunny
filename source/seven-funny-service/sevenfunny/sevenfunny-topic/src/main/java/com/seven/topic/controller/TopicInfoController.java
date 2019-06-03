@@ -16,10 +16,23 @@ public class TopicInfoController {
     @Autowired
     TopicInfoService topicInfoService;
 
+    /**
+     * 创建话题
+     * @param topicInfo 【标题+内容+（标签）+用户id】
+     * @return
+     */
     @PostMapping(value = "/saveTopicInfo")
     public ResultResponse savaTopicInfo(TopicInfo topicInfo){
         topicInfoService.saveTopicInfo(topicInfo);
-        ResultResponse resultResponse = new ResultResponse(ResultCode.SUCCESS,null);
-        return resultResponse;
+        return new ResultResponse(ResultCode.SUCCESS,null);
+    }
+
+    /**
+     * 获取最新话题
+     * @return
+     */
+    @PostMapping(value = "/getLatestTopics")
+    public ResultResponse getLatestTopics(){
+        return new ResultResponse(ResultCode.SUCCESS, topicInfoService.findLatestTopics());
     }
 }
