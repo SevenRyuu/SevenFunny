@@ -45,7 +45,7 @@ public class UserInfoController {
      */
     @PostMapping(value = "/login")
     public ResultResponse login(@RequestBody UserInfo userInfo){
-        UserInfo returnUserInfo = userInfoService.findByMobileAndPassword(userInfo);
+        UserInfo returnUserInfo = userInfoService.findByMobileAndPassword(userInfo.getMobile(),userInfo.getPassword());
         if (returnUserInfo != null){
             return new ResultResponse(ResultCode.SUCCESS, null);
         }

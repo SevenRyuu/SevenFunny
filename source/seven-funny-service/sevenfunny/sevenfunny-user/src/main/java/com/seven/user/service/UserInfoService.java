@@ -3,6 +3,7 @@ package com.seven.user.service;
 import com.seven.user.dao.UserInfoMapper;
 import com.seven.user.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.seven.common.entity.util.IdWorker;
@@ -22,6 +23,9 @@ public class UserInfoService {
     @Autowired
     IdWorker idWorker;
 
+    @Autowired
+    BCryptPasswordEncoder encoder;
+
     public UserInfo getUserInfo(UserInfo userInfo){
         return userInfoMapper.selectByPrimaryKey(userInfo.getId());
     }
@@ -29,11 +33,18 @@ public class UserInfoService {
     public void register(UserInfo userInfo){
         userInfo.setId(idWorker.nextId()+"");
         //密码加密
+        String encodePassword = encoder.encode(userInfo.getPassword());
+        userInfo.setPassword(encodePassword);
 
         userInfoMapper.insertUserInfo(userInfo);
     }
 
-    public UserInfo findByMobileAndPassword(UserInfo userInfo){
-        return userInfoMapper.findByMobileAndPassword(userInfo.getMobile(), userInfo.getPassword());
+    public UserInfo findByMobileAndPassword(String mobile, String password){
+        UserInfo userInfo = userInfoMapper.findByMobile(mobile);
+
+        if(userInfo != null && encoder.matches(password,userInfo.getPassword())){
+            return userInfo;
+        }
+        return null;
     }
 }

@@ -15,5 +15,7 @@ public interface UserInfoMapper {
 
     UserInfo findByMobileAndPassword(String mobile, String password);
 
+    UserInfo findByMobile(String mobile);
+
     void insertUserInfo(UserInfo userInfo);
 }

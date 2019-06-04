@@ -39,6 +39,24 @@
           and password = #{password}
     </select>
 
+    <select id="findByMobile" resultType="com.seven.user.entity.UserInfo">
+        select  /* 通过手机号获取用户信息*/
+             id
+            ,mobile
+            ,password
+            ,nickname
+            ,gender
+            ,birthday
+            ,email
+            ,avatar
+            ,intro
+            ,reg_dt
+            ,upd_dt
+            ,last_dt
+        from sf_user_info
+        where mobile = #{mobile}
+    </select>
+
     <insert id="insertUserInfo" parameterType="com.seven.user.entity.UserInfo">
     insert  /*增加用户信息*/
     into sf_user_info (
