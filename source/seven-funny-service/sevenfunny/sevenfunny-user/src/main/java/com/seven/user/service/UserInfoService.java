@@ -30,6 +30,10 @@ public class UserInfoService {
         return userInfoMapper.selectByPrimaryKey(userInfo.getId());
     }
 
+    /**
+     * 用户注册
+     * @param userInfo
+     */
     public void register(UserInfo userInfo){
         userInfo.setId(idWorker.nextId()+"");
         //密码加密

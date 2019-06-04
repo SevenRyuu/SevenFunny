@@ -35,7 +35,7 @@ public class UserInfoController {
     @PostMapping(value = "/register")
     public ResultResponse register(@RequestBody UserInfo userInfo){
         userInfoService.register(userInfo);
-        return new ResultResponse(ResultCode.SUCCESS, null);
+        return new ResultResponse(ResultCode.SUCCESS);
     }
 
     /**
@@ -47,8 +47,19 @@ public class UserInfoController {
     public ResultResponse login(@RequestBody UserInfo userInfo){
         UserInfo returnUserInfo = userInfoService.findByMobileAndPassword(userInfo.getMobile(),userInfo.getPassword());
         if (returnUserInfo != null){
-            return new ResultResponse(ResultCode.SUCCESS, null);
+            return new ResultResponse(ResultCode.SUCCESS);
         }
-        return new ResultResponse(ResultCode.USER_LOGIN_ERROR, null);
+        return new ResultResponse(ResultCode.USER_LOGIN_ERROR);
+    }
+
+    @PostMapping(value = "/test")
+    public ResultResponse test(String mobile, String password){
+        System.out.println("mobile >---------------->"+mobile);
+        System.out.println("password >---------------->"+password);
+        UserInfo returnUserInfo = userInfoService.findByMobileAndPassword(mobile,password);
+        if (returnUserInfo != null){
+            return new ResultResponse(ResultCode.SUCCESS);
+        }
+        return new ResultResponse(ResultCode.USER_LOGIN_ERROR);
     }
 }

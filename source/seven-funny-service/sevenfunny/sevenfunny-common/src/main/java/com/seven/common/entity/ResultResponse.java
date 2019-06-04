@@ -21,6 +21,11 @@ public class ResultResponse implements Serializable {
         this.data = data;
     }
 
+    public ResultResponse(ResultCode resultCode) {
+        this.code = resultCode.code();
+        this.message = resultCode.message();
+    }
+
     public Integer getCode() {
         return code;
     }
