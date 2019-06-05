@@ -26,10 +26,6 @@ public class UserInfoService {
     @Autowired
     BCryptPasswordEncoder encoder;
 
-    public UserInfo getUserInfo(UserInfo userInfo){
-        return userInfoMapper.selectByPrimaryKey(userInfo.getId());
-    }
-
     /**
      * 用户注册
      * @param userInfo
@@ -50,5 +46,14 @@ public class UserInfoService {
             return userInfo;
         }
         return null;
+    }
+
+    /**
+     * 根据id获取用户信息
+     * @param id
+     * @return
+     */
+    public UserInfo findById(String id) {
+        return userInfoMapper.findById(id);
     }
 }

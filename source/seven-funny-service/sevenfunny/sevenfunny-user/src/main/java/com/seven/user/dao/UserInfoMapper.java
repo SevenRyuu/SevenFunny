@@ -2,8 +2,6 @@ package com.seven.user.dao;
 
 import com.seven.user.entity.UserInfo;
 
-import java.util.List;
-
 /**
  * @author ：SevenRyuu
  * date   ：2019/5/27 9:55 PM
@@ -11,7 +9,7 @@ import java.util.List;
  */
 public interface UserInfoMapper {
 
-    UserInfo selectByPrimaryKey(String id);
+    UserInfo findById(String id);
 
     UserInfo findByMobileAndPassword(String mobile, String password);
 

@@ -6,9 +6,13 @@ import com.seven.common.util.JwtUtil;
 import com.seven.user.entity.UserInfo;
 import com.seven.user.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLOutput;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,10 +31,36 @@ public class UserInfoController {
     @Autowired
     JwtUtil jwtUtil;
 
+    @Autowired
+    private HttpServletRequest request;
+
+    @Value("${jwt.config.tokenHead}")
+    private String tokenHead;
+
+    @Value("${jwt.config.header}")
+    private String header;
+
+    /**
+     * 获取用户信息
+     * @return
+     */
     @PostMapping(value = "/getUserInfo")
-    //@RequestMapping(value = "/getUserInfo", method = { RequestMethod.GET, RequestMethod.POST })
-    public ResultResponse getUserInfo(@RequestBody UserInfo userInfo){
-        return new ResultResponse(ResultCode.SUCCESS, userInfoService.getUserInfo(userInfo));
+    public ResultResponse getUserInfo(){
+
+        //获取jwt头信息
+        String authHeader = request.getHeader(header);
+
+        if(authHeader == null){
+            return new ResultResponse(ResultCode.USER_NOT_LOGGED_IN);
+        }
+        //提取token
+        String token = authHeader.substring(tokenHead.length());
+        UserInfo userInfo = userInfoService.findById(jwtUtil.getUserIdByToken(token));
+        if(userInfo == null){
+            return new ResultResponse(ResultCode.USER_NOT_LOGGED_IN);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, userInfo);
     }
 
     /**
@@ -54,13 +84,12 @@ public class UserInfoController {
         UserInfo returnUserInfo = userInfoService.findByMobileAndPassword(userInfo.getMobile(),userInfo.getPassword());
         if (returnUserInfo != null){
             //生成token
-            String token = jwtUtil.createJWT(returnUserInfo.getId(),returnUserInfo.getNickname(),"user");
-
+            String token = jwtUtil.createToken(returnUserInfo.getId(),returnUserInfo.getMobile(),returnUserInfo.getNickname());
             Map map = new HashMap();
             map.put("token", token);
             map.put("nickname", returnUserInfo.getNickname());
 
-            return new ResultResponse(ResultCode.SUCCESS);
+            return new ResultResponse(ResultCode.SUCCESS, map);
         }
         return new ResultResponse(ResultCode.USER_LOGIN_ERROR);
     }
