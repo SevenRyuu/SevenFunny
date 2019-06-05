@@ -2,12 +2,15 @@ package com.seven.user.controller;
 
 import com.seven.common.entity.ResultCode;
 import com.seven.common.entity.ResultResponse;
+import com.seven.common.util.JwtUtil;
 import com.seven.user.entity.UserInfo;
 import com.seven.user.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLOutput;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ：SevenRyuu
@@ -20,6 +23,9 @@ public class UserInfoController {
 
     @Autowired
     UserInfoService userInfoService;
+
+    @Autowired
+    JwtUtil jwtUtil;
 
     @PostMapping(value = "/getUserInfo")
     //@RequestMapping(value = "/getUserInfo", method = { RequestMethod.GET, RequestMethod.POST })
@@ -47,6 +53,13 @@ public class UserInfoController {
     public ResultResponse login(@RequestBody UserInfo userInfo){
         UserInfo returnUserInfo = userInfoService.findByMobileAndPassword(userInfo.getMobile(),userInfo.getPassword());
         if (returnUserInfo != null){
+            //生成token
+            String token = jwtUtil.createJWT(returnUserInfo.getId(),returnUserInfo.getNickname(),"user");
+
+            Map map = new HashMap();
+            map.put("token", token);
+            map.put("nickname", returnUserInfo.getNickname());
+
             return new ResultResponse(ResultCode.SUCCESS);
         }
         return new ResultResponse(ResultCode.USER_LOGIN_ERROR);
