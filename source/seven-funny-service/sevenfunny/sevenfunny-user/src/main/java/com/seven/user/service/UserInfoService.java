@@ -56,4 +56,13 @@ public class UserInfoService {
     public UserInfo findById(String id) {
         return userInfoMapper.findById(id);
     }
+
+    /**
+     * 根据手机号获取用户信息
+     * @param mobile
+     * @return
+     */
+    public UserInfo findByMobile(String mobile){
+        return userInfoMapper.findByMobile(mobile);
+    }
 }

@@ -9,6 +9,8 @@ public enum ResultCode {
 
     /*成功状态码*/
     SUCCESS(1,"成功"),
+    /*异常状态码*/
+    ERROR(2,"异常"),
     /*1000~1999  区间表示参数错误*/
     PARAM_IS_INVALID(1001, "参数无效"),
     PARAM_IS_BLANK(1002, "参数为空"),
@@ -19,7 +21,7 @@ public enum ResultCode {
     USER_LOGIN_ERROR(2002, "账号不存在或密码错误"),
     USER_ACCOUNT_FORBIDDEN(2003, "账号已被禁用"),
     USER_NOT_EXIST(2004, "用户不存在"),
-    USER_HA_EXISTED(2005, "用户已存在")
+    USER_HAS_EXISTED(2005, "用户已存在")
     /*3000~3999  区间表示接口异常*/
 
     ;

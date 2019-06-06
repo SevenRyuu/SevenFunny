@@ -5,6 +5,7 @@ import com.seven.common.entity.ResultResponse;
 import com.seven.common.util.JwtUtil;
 import com.seven.user.entity.UserInfo;
 import com.seven.user.service.UserInfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +71,14 @@ public class UserInfoController {
      */
     @PostMapping(value = "/register")
     public ResultResponse register(@RequestBody UserInfo userInfo){
+        //手机号及密码不能为空
+        if(StringUtils.isBlank(userInfo.getMobile()) || StringUtils.isBlank(userInfo.getPassword())){
+            return new ResultResponse(ResultCode.PARAM_IS_BLANK);
+        }
+        //用户已存在
+        if (userInfoService.findByMobile(userInfo.getMobile()) != null){
+            return  new ResultResponse(ResultCode.USER_HAS_EXISTED);
+        }
         userInfoService.register(userInfo);
         return new ResultResponse(ResultCode.SUCCESS);
     }
