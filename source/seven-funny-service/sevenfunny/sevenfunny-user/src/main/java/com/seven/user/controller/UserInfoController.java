@@ -8,6 +8,7 @@ import com.seven.user.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,6 +102,17 @@ public class UserInfoController {
             return new ResultResponse(ResultCode.SUCCESS, map);
         }
         return new ResultResponse(ResultCode.USER_LOGIN_ERROR);
+    }
+
+    @PostMapping(value = "/getById")
+    public ResultResponse getById(@RequestBody UserInfo userInfo){
+        return new ResultResponse(ResultCode.SUCCESS, userInfoService.findById(userInfo.getId()));
+    }
+
+    @PostMapping(value = "/delById")
+    public ResultResponse delById(@RequestBody UserInfo userInfo){
+        userInfoService.delById(userInfo.getId());
+        return new ResultResponse(ResultCode.SUCCESS);
     }
 
     @PostMapping(value = "/test")

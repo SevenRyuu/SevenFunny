@@ -32,3 +32,6 @@ jwt:
     ttl: 360000
     header: Authorization
     tokenHead: "Bearer "
+
+redid:
+  host: 192.168.13.200

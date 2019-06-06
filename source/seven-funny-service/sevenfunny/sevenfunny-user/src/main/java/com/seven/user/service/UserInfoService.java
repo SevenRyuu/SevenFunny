@@ -3,10 +3,13 @@ package com.seven.user.service;
 import com.seven.user.dao.UserInfoMapper;
 import com.seven.user.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.seven.common.entity.util.IdWorker;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ：SevenRyuu
@@ -25,6 +28,9 @@ public class UserInfoService {
 
     @Autowired
     BCryptPasswordEncoder encoder;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
     /**
      * 用户注册
@@ -54,7 +60,16 @@ public class UserInfoService {
      * @return
      */
     public UserInfo findById(String id) {
-        return userInfoMapper.findById(id);
+
+        //从缓存中读取
+        UserInfo userInfo = (UserInfo) redisTemplate.opsForValue().get("user_"+id);
+        //如果缓存没有则到数据库查询并放入缓存
+        if(userInfo == null){
+            userInfo = userInfoMapper.findById(id);
+            redisTemplate.opsForValue().set("user_"+id,userInfo,10,TimeUnit.SECONDS);
+        }
+
+        return userInfo;
     }
 
     /**
@@ -64,5 +79,10 @@ public class UserInfoService {
      */
     public UserInfo findByMobile(String mobile){
         return userInfoMapper.findByMobile(mobile);
+    }
+
+    public void delById(String id){
+        redisTemplate.delete("user_"+id);
+        userInfoMapper.deleteById(id);
     }
 }

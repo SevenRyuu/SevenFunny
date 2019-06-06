@@ -89,4 +89,10 @@
       )
   </insert>
 
+    <delete id="deleteById">
+        delete /*根据id删除用户信息*/
+            sf_user_info
+          where id = #{id}
+    </delete>
+
 </mapper>

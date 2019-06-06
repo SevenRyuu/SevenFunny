@@ -16,4 +16,6 @@ public interface UserInfoMapper {
     UserInfo findByMobile(String mobile);
 
     void insertUserInfo(UserInfo userInfo);
+
+    void deleteById(String id);
 }
