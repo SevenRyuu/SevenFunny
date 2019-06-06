@@ -18,4 +18,6 @@ public interface UserInfoMapper {
     void insertUserInfo(UserInfo userInfo);
 
     void deleteById(String id);
+
+    void deleteByMobile(String mobile);
 }

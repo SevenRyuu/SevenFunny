@@ -3,6 +3,8 @@ package com.seven.user.service;
 import com.seven.user.dao.UserInfoMapper;
 import com.seven.user.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -84,5 +86,15 @@ public class UserInfoService {
     public void delById(String id){
         redisTemplate.delete("user_"+id);
         userInfoMapper.deleteById(id);
+    }
+
+    @Cacheable(value="userCache_",key="#mobile")
+    public UserInfo findByMobileCache(String mobile){
+        return userInfoMapper.findByMobile(mobile);
+    }
+
+    @CacheEvict(value="userCache_",key="#mobile")
+    public void delByMobileCache(String mobile){
+        userInfoMapper.deleteByMobile(mobile);
     }
 }

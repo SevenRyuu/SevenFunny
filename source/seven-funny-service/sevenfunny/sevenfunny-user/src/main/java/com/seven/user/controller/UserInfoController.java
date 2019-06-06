@@ -115,6 +115,17 @@ public class UserInfoController {
         return new ResultResponse(ResultCode.SUCCESS);
     }
 
+    @PostMapping(value = "/getByMobile")
+    public ResultResponse getByMobile(@RequestBody UserInfo userInfo){
+        return new ResultResponse(ResultCode.SUCCESS, userInfoService.findByMobileCache(userInfo.getMobile()));
+    }
+
+    @PostMapping(value = "/delByMobile")
+    public ResultResponse delByMobile(@RequestBody UserInfo userInfo){
+        userInfoService.delByMobileCache(userInfo.getMobile());
+        return new ResultResponse(ResultCode.SUCCESS);
+    }
+
     @PostMapping(value = "/test")
     public ResultResponse test(String mobile, String password){
         System.out.println("mobile >---------------->"+mobile);

@@ -95,4 +95,10 @@
           where id = #{id}
     </delete>
 
+    <delete id="deleteById">
+        delete /*根据手机号删除用户信息*/
+            sf_user_info
+          where mobile = #{mobile}
+    </delete>
+
 </mapper>
