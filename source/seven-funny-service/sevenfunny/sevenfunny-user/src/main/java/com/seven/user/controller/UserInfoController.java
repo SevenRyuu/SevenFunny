@@ -87,6 +87,11 @@ public class UserInfoController {
      */
     @PostMapping(value = "/login")
     public ResultResponse login(@RequestBody UserInfo userInfo){
+        //手机号及密码不能为空
+        if(StringUtils.isBlank(userInfo.getMobile()) || StringUtils.isBlank(userInfo.getPassword())){
+            return new ResultResponse(ResultCode.PARAM_IS_BLANK);
+        }
+
         UserInfo returnUserInfo = userInfoService.checkMobilePassword(userInfo.getMobile(),userInfo.getPassword());
 
         if (returnUserInfo != null){

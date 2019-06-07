@@ -1,6 +1,7 @@
 package com.seven.user.service;
 
 import com.seven.common.entity.util.IdWorker;
+import com.seven.common.exception.SevenFunnyException;
 import com.seven.user.dao.UserInfoMapper;
 import com.seven.user.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,11 +143,11 @@ public class UserInfoService {
         UserInfo userInfo = userInfoMapper.findById(id);
         if (userInfo == null){
             //用户不存在
-            throw new RuntimeException("USER_NOT_LOGGED_IN");
+            throw new SevenFunnyException("USER_NOT_LOGGED_IN");
         }
         if(!encoder.matches(oldPassword, userInfo.getPassword())){
             //密码错误
-            throw new RuntimeException("USER_PASSWORD_ERROR");
+            throw new SevenFunnyException("USER_PASSWORD_ERROR");
         }
         userInfoMapper.changePassword(id, encoder.encode(newPassword));
     }

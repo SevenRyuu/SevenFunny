@@ -2,6 +2,7 @@ package com.seven.user.controller;
 
 import com.seven.common.entity.ResultCode;
 import com.seven.common.entity.ResultResponse;
+import com.seven.common.exception.SevenFunnyException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +16,8 @@ public class GlobalExceptionHandler {
         return new ResultResponse(ResultCode.ERROR, e.getMessage());
     }
 
-    @ExceptionHandler(value = RuntimeException.class)
-    public ResultResponse customErrorHandler(RuntimeException e){
+    @ExceptionHandler(value = SevenFunnyException.class)
+    public ResultResponse customErrorHandler(SevenFunnyException e){
         return new ResultResponse(ResultCode.valueOf(e.getMessage()));
     }
 }
