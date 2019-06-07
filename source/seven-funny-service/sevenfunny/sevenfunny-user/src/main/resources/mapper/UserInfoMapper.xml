@@ -57,6 +57,20 @@
         where mobile = #{mobile}
     </select>
 
+    <select id="checkMobileCnt" resultType="int">
+        select  /* 检查手机号数量*/
+             count(1)
+        from sf_user_info
+        where mobile = #{mobile}
+    </select>
+
+    <select id="checkNicknameCnt" resultType="int">
+        select  /* 检查昵称数量*/
+             count(1)
+        from sf_user_info
+        where nickname = #{nickname}
+    </select>
+
     <insert id="insertUserInfo" parameterType="com.seven.user.entity.UserInfo">
     insert  /*增加用户信息*/
     into sf_user_info (
@@ -64,11 +78,6 @@
         ,mobile
         ,password
         ,nickname
-        ,gender
-        ,birthday
-        ,email
-        ,avatar
-        ,intro
         ,reg_dt
         ,upd_dt
         ,last_dt
@@ -78,24 +87,34 @@
         ,#{mobile}
         ,#{password}
         ,#{nickname}
-        ,#{gender}
-        ,#{birthday}
-        ,#{email}
-        ,#{avatar}
-        ,#{intro}
         ,SYSDATE()
         ,SYSDATE()
         ,SYSDATE()
       )
-  </insert>
+    </insert>
 
-    <delete id="deleteById">
+    <update id="updateUserInfo" parameterType="com.seven.user.entity.UserInfo">
+    update  /*修改用户基本信息*/
+      sf_user_info
+      set avatar = #{avatar}
+          ,intro = #{intro}
+      where id = #{id}
+    </update>
+
+    <update id="changePassword">
+    update  /*修改用户密码*/
+      sf_user_info
+      set password = #{password}
+      where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="com.seven.user.entity.UserInfo">
         delete /*根据id删除用户信息*/
             sf_user_info
           where id = #{id}
     </delete>
 
-    <delete id="deleteById">
+    <delete id="deleteByMobile" parameterType="com.seven.user.entity.UserInfo">
         delete /*根据手机号删除用户信息*/
             sf_user_info
           where mobile = #{mobile}

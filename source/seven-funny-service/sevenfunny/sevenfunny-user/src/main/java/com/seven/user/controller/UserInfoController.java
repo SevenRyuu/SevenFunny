@@ -8,11 +8,7 @@ import com.seven.user.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -46,7 +42,7 @@ public class UserInfoController {
      * 获取用户信息
      * @return
      */
-    @PostMapping(value = "/getUserInfo")
+    @RequestMapping(value = "/getUserInfo", method={RequestMethod.GET,RequestMethod.POST})
     public ResultResponse getUserInfo(){
 
         //获取jwt头信息
@@ -76,8 +72,8 @@ public class UserInfoController {
         if(StringUtils.isBlank(userInfo.getMobile()) || StringUtils.isBlank(userInfo.getPassword())){
             return new ResultResponse(ResultCode.PARAM_IS_BLANK);
         }
-        //用户已存在
-        if (userInfoService.findByMobile(userInfo.getMobile()) != null){
+        //验证手机号或昵称是否已经存在
+        if(userInfoService.checkMobileCnt(userInfo.getMobile()) > 0 || userInfoService.checkNicknameCnt(userInfo.getNickname()) > 0){
             return  new ResultResponse(ResultCode.USER_HAS_EXISTED);
         }
         userInfoService.register(userInfo);
@@ -91,17 +87,40 @@ public class UserInfoController {
      */
     @PostMapping(value = "/login")
     public ResultResponse login(@RequestBody UserInfo userInfo){
-        UserInfo returnUserInfo = userInfoService.findByMobileAndPassword(userInfo.getMobile(),userInfo.getPassword());
+        UserInfo returnUserInfo = userInfoService.checkMobilePassword(userInfo.getMobile(),userInfo.getPassword());
+
         if (returnUserInfo != null){
             //生成token
             String token = jwtUtil.createToken(returnUserInfo.getId(),returnUserInfo.getMobile(),returnUserInfo.getNickname());
             Map map = new HashMap();
             map.put("token", token);
-            map.put("nickname", returnUserInfo.getNickname());
+            map.put("userInfo", returnUserInfo);
 
             return new ResultResponse(ResultCode.SUCCESS, map);
         }
-        return new ResultResponse(ResultCode.USER_LOGIN_ERROR);
+        return new ResultResponse(ResultCode.USER_NOT_EXIST);
+    }
+
+    /**
+     * 更新用户基本信息
+     * @param userInfo 【头像+简介】
+     * @return
+     */
+    @PostMapping(value = "updateUserInfo")
+    public ResultResponse updateUserInfo(@RequestBody UserInfo userInfo){
+        userInfoService.updateUserInfo(userInfo);
+        return new ResultResponse(ResultCode.SUCCESS);
+    }
+
+    /**
+     * 修改用户密码
+     * @param requestMap 【id+原密码+新密码】
+     * @return
+     */
+    @PostMapping(value = "changePassword")
+    public ResultResponse changePassword(@RequestBody Map<String,String> requestMap){
+        userInfoService.changePassword(requestMap.get("id"),requestMap.get("oldPassword"), requestMap.get("newPassword"));
+        return new ResultResponse(ResultCode.SUCCESS);
     }
 
     @PostMapping(value = "/getById")
@@ -126,11 +145,11 @@ public class UserInfoController {
         return new ResultResponse(ResultCode.SUCCESS);
     }
 
-    @PostMapping(value = "/test")
+    @GetMapping(value = "/test")
     public ResultResponse test(String mobile, String password){
         System.out.println("mobile >---------------->"+mobile);
         System.out.println("password >---------------->"+password);
-        UserInfo returnUserInfo = userInfoService.findByMobileAndPassword(mobile,password);
+        UserInfo returnUserInfo = userInfoService.checkMobilePassword(mobile,password);
         if (returnUserInfo != null){
             return new ResultResponse(ResultCode.SUCCESS);
         }

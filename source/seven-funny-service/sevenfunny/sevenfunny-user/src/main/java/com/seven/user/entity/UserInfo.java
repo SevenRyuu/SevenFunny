@@ -1,5 +1,9 @@
 package com.seven.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,19 +11,33 @@ import java.util.Date;
  * date   ：2019/5/27 9:45 PM
  * email  ：sevenryuu77@gmail.com
  */
-public class UserInfo {
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+public class UserInfo implements Serializable {
 
     private String id;
+
     private String mobile;
+
     private String password;
+
     private String nickname;
+
     private String gender;
+
     private Date birthday;
+
     private String email;
+
     private String avatar;
+
     private String intro;
+
+    @JsonIgnore
     private Date reg_dt;
+
+    @JsonIgnore
     private Date upd_dt;
+
     private Date last_dt;
 
     public String getId() {

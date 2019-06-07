@@ -21,7 +21,8 @@ public enum ResultCode {
     USER_LOGIN_ERROR(2002, "账号不存在或密码错误"),
     USER_ACCOUNT_FORBIDDEN(2003, "账号已被禁用"),
     USER_NOT_EXIST(2004, "用户不存在"),
-    USER_HAS_EXISTED(2005, "用户已存在")
+    USER_HAS_EXISTED(2005, "用户已存在"),
+    USER_PASSWORD_ERROR(2006, "密码错误")
     /*3000~3999  区间表示接口异常*/
 
     ;

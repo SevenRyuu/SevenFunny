@@ -1,16 +1,11 @@
 package com.seven.user;
 
 import com.seven.user.dao.UserInfoMapper;
-import com.seven.user.entity.UserInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,6 +38,30 @@ public class SevenfunnyUserApplicationTests {
         UserInfo userInfo = new UserInfo();
         userInfo.setId("7");
         userInfoMapper.insertUserInfo(userInfo);
+    }*/
+
+    /*@Test
+    public void testInvokeEnum() throws JsonProcessingException {
+        //Class<?> aClass = Class.forName("com.seven.common.entity.ResultCode");
+
+        //Object[] oo = aClass.getEnumConstants();
+        //Object invoke = getMeaning.invoke(oo[0],"0");
+
+        //Gson gson = new Gson();
+        //ObjectMapper objectMapper = new ObjectMapper();
+        Class a = ResultCode.class;
+        //Method method = a.getDeclaredMethod("ERROR");
+        //method.invoke();
+        Object[] aa = a.getEnumConstants();
+        for(Object bb : aa){
+            if(bb.equals("ERROR")){
+                //System.out.println(gson.toJson(bb));
+                System.out.println(bb);
+                //System.out.println(objectMapper.writeValueAsString(bb));
+            }
+        }
+
+        //System.out.println(ResultCode.valueOf("PARAM_IS_BLANK"));
     }*/
 
 }

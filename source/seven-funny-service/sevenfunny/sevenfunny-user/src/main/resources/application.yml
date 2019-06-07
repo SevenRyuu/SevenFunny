@@ -6,6 +6,10 @@ spring:
     name: sevenfunny-user
 
 #####################################################################################################
+# redis 属性配置
+  redis:
+    host: 192.168.13.200
+#####################################################################################################
 # mysql 属性配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -33,5 +37,3 @@ jwt:
     header: Authorization
     tokenHead: "Bearer "
 
-redid:
-  host: 192.168.13.200

@@ -1,6 +1,7 @@
 package com.seven.user.dao;
 
 import com.seven.user.entity.UserInfo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author ：SevenRyuu
@@ -20,4 +21,12 @@ public interface UserInfoMapper {
     void deleteById(String id);
 
     void deleteByMobile(String mobile);
+
+    int checkMobileCnt(String mobile);
+
+    int checkNicknameCnt(String nickname);
+
+    void updateUserInfo(UserInfo userInfo);
+
+    void changePassword(@Param("id") String id, @Param("password") String password);
 }
