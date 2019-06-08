@@ -12,8 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * @author ：SevenRyuu
  * date   ：2019/5/30 9:26 PM
@@ -71,14 +69,14 @@ public class UserInfoService {
     public UserInfo findById(String id) {
 
         //从缓存中读取
-        UserInfo userInfo = (UserInfo) redisTemplate.opsForValue().get("user_"+id);
+        /*UserInfo userInfo = (UserInfo) redisTemplate.opsForValue().get("user_"+id);
         //如果缓存没有则到数据库查询并放入缓存
         if(userInfo == null){
             userInfo = userInfoMapper.findById(id);
             redisTemplate.opsForValue().set("user_"+id,userInfo,30,TimeUnit.MINUTES);
-        }
+        }*/
 
-        return userInfo;
+        return userInfoMapper.findById(id);
     }
 
     /**

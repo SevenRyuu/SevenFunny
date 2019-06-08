@@ -33,7 +33,7 @@ logging:
 jwt:
   config:
     key: test
-    ttl: 360000
+    #ttl: 360000
     header: Authorization
     tokenHead: "Bearer "
 

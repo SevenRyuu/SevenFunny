@@ -7,7 +7,6 @@ import com.seven.user.entity.UserInfo;
 import com.seven.user.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +31,6 @@ public class UserInfoController {
     @Autowired
     private HttpServletRequest request;
 
-    @Value("${jwt.config.tokenHead}")
-    private String tokenHead;
-
-    @Value("${jwt.config.header}")
-    private String header;
-
     /**
      * 获取用户信息
      * @return
@@ -46,13 +39,7 @@ public class UserInfoController {
     public ResultResponse getUserInfo(){
 
         //获取jwt头信息
-        String authHeader = request.getHeader(header);
-
-        if(authHeader == null){
-            return new ResultResponse(ResultCode.USER_NOT_LOGGED_IN);
-        }
-        //提取token
-        String token = authHeader.substring(tokenHead.length());
+        String token = (String) request.getAttribute("token");
         UserInfo userInfo = userInfoService.findById(jwtUtil.getUserIdByToken(token));
         if(userInfo == null){
             return new ResultResponse(ResultCode.USER_NOT_LOGGED_IN);
