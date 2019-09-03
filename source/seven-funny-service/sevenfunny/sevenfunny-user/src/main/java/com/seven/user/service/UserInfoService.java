@@ -4,6 +4,8 @@ import com.seven.common.entity.util.IdWorker;
 import com.seven.common.exception.SevenFunnyException;
 import com.seven.user.dao.UserInfoMapper;
 import com.seven.user.entity.UserInfo;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -11,6 +13,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ：SevenRyuu
@@ -32,6 +38,9 @@ public class UserInfoService {
 
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 
     /**
      * 用户注册
@@ -158,5 +167,24 @@ public class UserInfoService {
             throw new SevenFunnyException("USER_PASSWORD_ERROR");
         }
         userInfoMapper.changePassword(id, encoder.encode(newPassword));
+    }
+
+    /**
+     * 发送手机验证码
+     * @param mobile
+     */
+    public void sendsms(String mobile) {
+        //生成六位数字随机数
+        String verificationCode = RandomStringUtils.randomNumeric(6);
+        //向缓存中放一份(6小时过期)
+        redisTemplate.opsForValue().set("VerificationCode_"+mobile, verificationCode, 6, TimeUnit.HOURS);
+        //给用户发一份
+        Map<String, String> map = new HashMap<>();
+        map.put("mobie", mobile);
+        map.put("verificationCode", verificationCode);
+        rabbitTemplate.convertAndSend("sms", map);
+
+        //向控制台显示一份【方便测试】
+        System.out.println("验证码为： "+ verificationCode);
     }
 }

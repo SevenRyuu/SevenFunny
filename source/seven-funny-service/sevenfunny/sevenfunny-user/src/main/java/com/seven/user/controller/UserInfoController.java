@@ -7,6 +7,7 @@ import com.seven.user.entity.UserInfo;
 import com.seven.user.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,16 +32,24 @@ public class UserInfoController {
     @Autowired
     private HttpServletRequest request;
 
+    private RedisTemplate redisTemplate;
+
     /**
      * 用户注册
      * @param userInfo 【手机号+密码+昵称】
      * @return
      */
-    @PostMapping(value = "/register")
-    public ResultResponse register(@RequestBody UserInfo userInfo){
+    @PostMapping(value = "/login/register")
+    public ResultResponse register(@RequestParam(required = false) String verificationCode,@RequestBody UserInfo userInfo){
+        //从缓存中得到验证码
+        String verificationCodeRedis = (String) redisTemplate.opsForValue().get("verificationCode_" + userInfo.getMobile());
+        //验证码不能为空或错误
+        if(StringUtils.isBlank(verificationCodeRedis) || !verificationCodeRedis.equals(verificationCode)){
+            return new ResultResponse(ResultCode.USER_VERIFICATION_CODE_INVALID);
+        }
         //手机号及密码不能为空
         if(StringUtils.isBlank(userInfo.getMobile()) || StringUtils.isBlank(userInfo.getPassword())){
-            return new ResultResponse(ResultCode.PARAM_IS_BLANK);
+            return new ResultResponse(ResultCode.USER_ACCOUNT_PASSWORD_IS_BLANK);
         }
         //验证手机号或昵称是否已经存在
         if(userInfoService.checkMobileCnt(userInfo.getMobile()) > 0 || userInfoService.checkNicknameCnt(userInfo.getNickname()) > 0){
@@ -124,6 +133,18 @@ public class UserInfoController {
     @PostMapping(value = "changePassword")
     public ResultResponse changePassword(@RequestBody Map<String,String> requestMap){
         userInfoService.changePassword((String) request.getAttribute("token_user_id"),requestMap.get("oldPassword"), requestMap.get("newPassword"));
+        return new ResultResponse(ResultCode.SUCCESS);
+    }
+
+
+    /**
+     * 发送手机验证码
+     * @param requestMap 【手机号码】
+     * @return
+     */
+    @PostMapping(value = "/login/sendsms")
+    public ResultResponse sendsms(@RequestBody Map<String,String> requestMap){
+        userInfoService.sendsms(requestMap.get("mobile"));
         return new ResultResponse(ResultCode.SUCCESS);
     }
 

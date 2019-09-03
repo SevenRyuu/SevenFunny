@@ -22,7 +22,9 @@ public enum ResultCode {
     USER_ACCOUNT_FORBIDDEN(2003, "账号已被禁用"),
     USER_NOT_EXIST(2004, "用户不存在"),
     USER_HAS_EXISTED(2005, "用户已存在"),
-    USER_PASSWORD_ERROR(2006, "密码错误")
+    USER_PASSWORD_ERROR(2006, "密码错误"),
+    USER_VERIFICATION_CODE_INVALID(2007, "验证码无效、请输入正确的验证码"),
+    USER_ACCOUNT_PASSWORD_IS_BLANK(2008, "用户名或密码为空")
     /*3000~3999  区间表示接口异常*/
 
     ;

@@ -13,6 +13,7 @@
         <module>sevenfunny-user</module>
         <module>sevenfunny-topic</module>
         <module>sevenfunny-rabbitmqtest</module>
+        <module>sevenfunny-rabbitmq</module>
     </modules>
     <packaging>pom</packaging>
 
