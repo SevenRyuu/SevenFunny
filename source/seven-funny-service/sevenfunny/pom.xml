@@ -12,6 +12,7 @@
         <module>sevenfunny-common</module>
         <module>sevenfunny-user</module>
         <module>sevenfunny-topic</module>
+        <module>sevenfunny-rabbitmqtest</module>
     </modules>
     <packaging>pom</packaging>
 
