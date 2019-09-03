@@ -8,12 +8,12 @@ spring:
 #####################################################################################################
 # redis 属性配置
   redis:
-    host: 192.168.13.200
+    host: 192.168.0.200
 #####################################################################################################
 # mysql 属性配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.13.200:3306/sevenfunny_user?useUnicode=true&autoReconnect=true&characterEncoding=utf8&useSSL=true
+    url: jdbc:mysql://192.168.0.200:3306/sevenfunny_user?useUnicode=true&autoReconnect=true&characterEncoding=utf8&useSSL=true
     username: root
     password: 123456
 mybatis:

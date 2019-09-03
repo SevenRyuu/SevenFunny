@@ -32,23 +32,6 @@ public class UserInfoController {
     private HttpServletRequest request;
 
     /**
-     * 获取用户信息
-     * @return
-     */
-    @RequestMapping(value = "/getUserInfo", method={RequestMethod.GET,RequestMethod.POST})
-    public ResultResponse getUserInfo(){
-
-        //获取jwt头信息
-        String token = (String) request.getAttribute("token");
-        UserInfo userInfo = userInfoService.findById(jwtUtil.getUserIdByToken(token));
-        if(userInfo == null){
-            return new ResultResponse(ResultCode.USER_NOT_LOGGED_IN);
-        }
-
-        return new ResultResponse(ResultCode.SUCCESS, userInfo);
-    }
-
-    /**
      * 用户注册
      * @param userInfo 【手机号+密码+昵称】
      * @return
@@ -94,13 +77,42 @@ public class UserInfoController {
     }
 
     /**
+     * 获取用户信息
+     * @return
+     */
+    @RequestMapping(value = "/getUserInfo", method={RequestMethod.GET,RequestMethod.POST})
+    public ResultResponse getUserInfo(){
+
+        //获取jwt头信息
+        //String token = (String) request.getAttribute("token");
+        //UserInfo userInfo = userInfoService.findById(jwtUtil.getUserIdByToken(token));
+
+        //获取jwt token_user_id
+        UserInfo userInfo = userInfoService.findById((String) request.getAttribute("token_user_id"));
+        if(userInfo == null){
+            return new ResultResponse(ResultCode.USER_NOT_LOGGED_IN);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, userInfo);
+    }
+
+    /**
      * 更新用户基本信息
      * @param userInfo 【头像+简介】
      * @return
      */
     @PostMapping(value = "updateUserInfo")
     public ResultResponse updateUserInfo(@RequestBody UserInfo userInfo){
+        //通过token获得id
+        userInfo.setId((String) request.getAttribute("token_user_id"));
         userInfoService.updateUserInfo(userInfo);
+        return new ResultResponse(ResultCode.SUCCESS);
+    }
+
+    @PostMapping(value = "updateUserInfo2")
+    public ResultResponse updateUserInfo2(){
+        //userInfoService.updateUserInfo(userInfo);
+        System.out.println(request.getAttribute("test"));
         return new ResultResponse(ResultCode.SUCCESS);
     }
 
@@ -111,7 +123,7 @@ public class UserInfoController {
      */
     @PostMapping(value = "changePassword")
     public ResultResponse changePassword(@RequestBody Map<String,String> requestMap){
-        userInfoService.changePassword(requestMap.get("id"),requestMap.get("oldPassword"), requestMap.get("newPassword"));
+        userInfoService.changePassword((String) request.getAttribute("token_user_id"),requestMap.get("oldPassword"), requestMap.get("newPassword"));
         return new ResultResponse(ResultCode.SUCCESS);
     }
 

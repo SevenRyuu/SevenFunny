@@ -128,6 +128,16 @@ public class UserInfoService {
     public void updateUserInfo(UserInfo userInfo){
         redisTemplate.delete("user_"+userInfo.getId());
         userInfoMapper.updateUserInfo(userInfo);
+        //updateUserInfo2();
+        //int a = 1/0;
+    }
+
+    public void updateUserInfo2(){
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId("1136886166935703552");
+        userInfo.setAvatar("testAvatar");
+        userInfo.setIntro("test简介");
+        userInfoMapper.updateUserInfo(userInfo);
     }
 
     /**
