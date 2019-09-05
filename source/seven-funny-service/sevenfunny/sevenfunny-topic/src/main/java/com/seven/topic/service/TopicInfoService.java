@@ -13,14 +13,17 @@ import java.util.List;
 public class TopicInfoService {
 
     @Autowired
-    TopicInfoMapper topicInfoMapper;
+    private TopicInfoMapper topicInfoMapper;
+
+    @Autowired
+    private com.seven.common.entity.util.IdWorker idWorker;
 
     /**
      * 保存话题
      * @param topicInfo
      */
     public void saveTopicInfo(TopicInfo topicInfo){
-        //topicInfo.setId("1");
+        topicInfo.setId(idWorker.nextId()+"");
         topicInfoMapper.insertTopicInfo(topicInfo);
     }
 

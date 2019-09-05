@@ -12,6 +12,8 @@ public class TopicInfo {
 
     private String label;
 
+    private String status;
+
     private Long visit_cnt;
 
     private Long reply_cnt;
@@ -54,6 +56,14 @@ public class TopicInfo {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getVisit_cnt() {

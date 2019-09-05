@@ -1,22 +1,19 @@
-package com.seven.topic;
+package com.seven.search;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@EnableDiscoveryClient
-@MapperScan("com.seven.topic.dao")
-public class SevenfunnyTopicApplication {
+public class SevenfunnySearchApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SevenfunnyTopicApplication.class, args);
+        SpringApplication.run(SevenfunnySearchApplication.class, args);
     }
 
     @Bean
     public com.seven.common.entity.util.IdWorker idWorker(){
         return new com.seven.common.entity.util.IdWorker(1,1);
     }
+
 }

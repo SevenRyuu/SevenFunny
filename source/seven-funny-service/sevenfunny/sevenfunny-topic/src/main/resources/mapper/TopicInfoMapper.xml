@@ -8,6 +8,7 @@
             ,title
             ,content
             ,label
+            ,status
             ,visit_cnt
             ,reply_cnt
             ,reg_id
@@ -24,6 +25,7 @@
             ,title
             ,content
             ,label
+            ,status
             ,visit_cnt
             ,reply_cnt
             ,reg_id
@@ -42,6 +44,7 @@
             ,title
             ,content
             ,label
+            ,status
             ,visit_cnt
             ,reply_cnt
             ,reg_id
@@ -54,6 +57,7 @@
             ,#{title}
             ,#{content}
             ,#{label}
+            ,'1'
             ,0
             ,0
             ,#{reg_id}
