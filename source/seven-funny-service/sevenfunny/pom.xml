@@ -15,6 +15,7 @@
         <module>sevenfunny-rabbitmqtest</module>
         <module>sevenfunny-rabbitmq</module>
         <module>sevenfunny-search</module>
+        <module>sevenfunny-mongodbtest</module>
     </modules>
     <packaging>pom</packaging>
 
