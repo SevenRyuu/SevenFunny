@@ -1,13 +1,14 @@
 package com.seven.topic.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.seven.common.entity.PageResult;
 import com.seven.common.entity.ResultCode;
 import com.seven.common.entity.ResultResponse;
 import com.seven.topic.entity.TopicInfo;
 import com.seven.topic.service.TopicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/topic")
@@ -34,5 +35,19 @@ public class TopicInfoController {
     @PostMapping(value = "/getLatestTopics")
     public ResultResponse getLatestTopics(){
         return new ResultResponse(ResultCode.SUCCESS, topicInfoService.findLatestTopics());
+    }
+
+    /**
+     * 分页获取所有话题
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping
+    public ResultResponse findAll(@RequestParam(required = false)Integer pageNum, @RequestParam(required = false)Integer pageSize){
+        Page<TopicInfo> page = PageHelper.startPage(pageNum, pageSize);
+        topicInfoService.findAll();
+        //PageInfo<TopicInfo> pageInfo = new PageInfo<>(list);
+        return new ResultResponse(ResultCode.SUCCESS, new PageResult<TopicInfo>(page.getTotal(), page.getResult()));
     }
 }

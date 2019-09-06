@@ -35,4 +35,12 @@ public class TopicInfoService {
         List<TopicInfo> topicInfos = topicInfoMapper.findLatestTopics();
         return topicInfos;
     }
+
+    /**
+     * 获取所有话题
+     * @return
+     */
+    public List<TopicInfo> findAll() {
+        return topicInfoMapper.findAll();
+    }
 }

@@ -19,6 +19,22 @@
         where id = #{id}
     </select>
 
+    <select id="findAll" resultType="com.seven.topic.entity.TopicInfo">
+        select  /*获取所有话题*/
+             id
+            ,title
+            ,content
+            ,label
+            ,status
+            ,visit_cnt
+            ,reply_cnt
+            ,reg_id
+            ,reg_dt
+            ,upd_id
+            ,upd_dt
+        from sf_topic_info
+    </select>
+
     <select id="findLatestTopics" resultType="com.seven.topic.entity.TopicInfo">
         select /获取最新话题/
              id

@@ -9,4 +9,6 @@ public interface TopicInfoMapper {
     void insertTopicInfo(TopicInfo topicInfo);
 
     List<TopicInfo> findLatestTopics();
+
+    List<TopicInfo> findAll();
 }

@@ -34,6 +34,13 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!-- PageHelper SpringBootStarter -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.12</version>
+        </dependency>
+
         <dependency>
             <groupId>com.seven</groupId>
             <artifactId>sevenfunny-common</artifactId>
