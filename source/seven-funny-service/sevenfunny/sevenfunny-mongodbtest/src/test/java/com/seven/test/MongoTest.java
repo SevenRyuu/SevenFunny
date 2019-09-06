@@ -1,12 +1,10 @@
 package com.seven.test;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author ：SevenRyuu
@@ -26,21 +24,21 @@ public class MongoTest {
         //封装查询条件(只查询访问量大于6的)
         //BasicDBObject bson = new BasicDBObject("visits",new BasicDBObject("$gt", 6));
         //得到集合中所有的文档
-        //FindIterable<Document> documents = roast.find(bson);
+        FindIterable<Document> documents = roast.find();
         //遍历数据
-        /*for (Document document : documents){
+        for (Document document : documents){
             System.out.println("内容: "+document.getString("content"));
             System.out.println("用户昵称: "+document.getString("nickname"));
             System.out.println("访问量: "+document.getDouble("visits"));
-        }*/
+        }
 
         //添加记录
-        Map<String, Object> map = new HashMap<>();
+        /*Map<String, Object> map = new HashMap<>();
         map.put("nickname", "java创建");
         map.put("content", "java内容");
         map.put("visits", 90);
         Document document = new Document(map);
-        roast.insertOne(document);
+        roast.insertOne(document);*/
 
         client.close();
     }
