@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("com.seven.topic.dao")
+@MapperScan("com.seven.topic.dao.mapper")
 public class SevenfunnyTopicApplication {
 
     public static void main(String[] args) {
