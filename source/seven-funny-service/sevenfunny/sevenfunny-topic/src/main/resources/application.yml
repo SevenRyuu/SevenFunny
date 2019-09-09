@@ -36,3 +36,10 @@ eureka:
 logging:
   level:
      com.seven.user.dao : debug
+
+jwt:
+  config:
+    key: test
+    #ttl: 360000
+    header: Authorization
+    tokenHead: "Bearer "

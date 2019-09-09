@@ -154,6 +154,15 @@ public class UserInfoController {
         return new ResultResponse(ResultCode.SUCCESS);
     }
 
+    /**
+     * 测试topic feign
+     * @param x
+     */
+    @RequestMapping(value = "/login/topicFeign", method = RequestMethod.GET)
+    public void testTopicFeign(@RequestParam(value = "x") String x){
+        System.out.println(x);
+    }
+
     @PostMapping(value = "/getById")
     public ResultResponse getById(@RequestBody UserInfo userInfo){
         return new ResultResponse(ResultCode.SUCCESS, userInfoService.findById(userInfo.getId()));
