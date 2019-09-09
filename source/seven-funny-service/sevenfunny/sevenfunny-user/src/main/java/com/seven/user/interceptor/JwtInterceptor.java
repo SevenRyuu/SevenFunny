@@ -2,7 +2,7 @@ package com.seven.user.interceptor;
 
 import com.seven.common.exception.SevenFunnyException;
 import com.seven.common.util.JwtUtil;
-import org.apache.commons.lang3.StringUtils;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         //拦截器只是负责把请求头中包含token的令牌进行一个解析验证
 
         //获取jwt头信息
-        String authHeader = request.getHeader(header);
+        /*String authHeader = request.getHeader(header);
 
         //请求头token不能为空、否则提示进行登录后再操作
         if(StringUtils.isBlank(authHeader)){
@@ -47,13 +47,23 @@ public class JwtInterceptor implements HandlerInterceptor {
         String token = authHeader.substring(tokenHead.length());
         if(null == token){
             throw new SevenFunnyException("USER_NOT_LOGGED_IN");
+        }*/
+        try{
+            //获取jwt头信息
+            String authHeader = request.getHeader(header);
+            //截取token
+            String token = authHeader.substring(tokenHead.length());
+            Claims claims = jwtUtil.parseJWT(token);
+            request.setAttribute("claims", claims);
+        }catch (Exception e){
+            throw new SevenFunnyException("USER_NOT_LOGGED_IN");
         }
 
         //request.setAttribute("token", token);
-        String token_user_id = jwtUtil.getUserIdByToken(token);
+        //String token_user_id = jwtUtil.getUserIdByToken(token);
         //String token_mobile = jwtUtil.getMobileByToken(token);
         //String token_nickname = jwtUtil.getNicknameByToken(token);
-        request.setAttribute("token_user_id", token_user_id);
+        //request.setAttribute("token_user_id", token_user_id);
         //request.setAttribute("token_mobile", token_mobile);
         //request.setAttribute("token_nickname", token_nickname);
 

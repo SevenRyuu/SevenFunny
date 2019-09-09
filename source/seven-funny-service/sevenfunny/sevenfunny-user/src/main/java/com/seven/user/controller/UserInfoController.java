@@ -5,6 +5,7 @@ import com.seven.common.entity.ResultResponse;
 import com.seven.common.util.JwtUtil;
 import com.seven.user.entity.UserInfo;
 import com.seven.user.service.UserInfoService;
+import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -97,7 +98,9 @@ public class UserInfoController {
         //UserInfo userInfo = userInfoService.findById(jwtUtil.getUserIdByToken(token));
 
         //获取jwt token_user_id
-        UserInfo userInfo = userInfoService.findById((String) request.getAttribute("token_user_id"));
+        //UserInfo userInfo = userInfoService.findById((String) request.getAttribute("token_user_id"));
+        Claims claims = (Claims) request.getAttribute("claims");
+        UserInfo userInfo = userInfoService.findById(claims.get("userId").toString());
         if(userInfo == null){
             return new ResultResponse(ResultCode.USER_NOT_LOGGED_IN);
         }
@@ -113,7 +116,9 @@ public class UserInfoController {
     @PostMapping(value = "updateUserInfo")
     public ResultResponse updateUserInfo(@RequestBody UserInfo userInfo){
         //通过token获得id
-        userInfo.setId((String) request.getAttribute("token_user_id"));
+        //userInfo.setId((String) request.getAttribute("token_user_id"));
+        Claims claims = (Claims) request.getAttribute("claims");
+        userInfo.setId(claims.get("userId").toString());
         userInfoService.updateUserInfo(userInfo);
         return new ResultResponse(ResultCode.SUCCESS);
     }
@@ -132,7 +137,8 @@ public class UserInfoController {
      */
     @PostMapping(value = "changePassword")
     public ResultResponse changePassword(@RequestBody Map<String,String> requestMap){
-        userInfoService.changePassword((String) request.getAttribute("token_user_id"),requestMap.get("oldPassword"), requestMap.get("newPassword"));
+        Claims claims = (Claims) request.getAttribute("claims");
+        userInfoService.changePassword(claims.get("userId").toString(),requestMap.get("oldPassword"), requestMap.get("newPassword"));
         return new ResultResponse(ResultCode.SUCCESS);
     }
 
