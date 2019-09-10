@@ -1,0 +1,47 @@
+server:
+  port: 8762
+
+spring:
+  application:
+    name: sevenfunny-user
+
+#####################################################################################################
+# rabbitMQ 属性配置
+  rabbitmq:
+    host: 192.168.0.200
+#####################################################################################################
+
+#####################################################################################################
+# redis 属性配置
+  redis:
+    host: 192.168.0.200
+#####################################################################################################
+
+#####################################################################################################
+# mysql 属性配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.0.200:3306/sevenfunny_user?useUnicode=true&autoReconnect=true&characterEncoding=utf8&useSSL=true
+    username: root
+    password: 123456
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.seven.user.entity
+#####################################################################################################
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+# 打印sql
+logging:
+  level:
+     com.seven.user.dao : debug
+
+jwt:
+  config:
+    key: test
+    #ttl: 360000
+    header: Authorization
+    tokenHead: "Bearer "
+
