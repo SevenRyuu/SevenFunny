@@ -61,7 +61,6 @@ public class TopicInfoController {
      */
     @GetMapping(value = "/testFeign")
     public ResultResponse testFeign(@RequestParam String x){
-        userClient.testFeign(x);
-        return null;
+        return userClient.testFeign(x);
     }
 }

@@ -1,6 +1,7 @@
 package com.seven.topic.feign;
 
 import com.seven.common.entity.ResultResponse;
+import com.seven.topic.feign.fallback.UserClientHystric;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * email  ：sevenryuu77@gmail.com
  * info   ：topic调用user
  */
-@FeignClient(value = "sevenfunny-user")
+@FeignClient(value = "sevenfunny-user", fallback = UserClientHystric.class)
 public interface UserClient {
 
     @GetMapping(value = "/user/topicFeign")

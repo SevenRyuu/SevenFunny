@@ -43,3 +43,8 @@ jwt:
     #ttl: 360000
     header: Authorization
     tokenHead: "Bearer "
+
+#开启熔断器
+feign:
+  hystrix:
+    enabled: true
