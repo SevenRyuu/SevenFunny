@@ -17,7 +17,7 @@ eureka:
 zuul:
   routes:
     sevenfunny-user:
-      path: /u/**
+      path: /uat/**
       serviceId: sevenfunny-user
   sensitive-headers:
 
