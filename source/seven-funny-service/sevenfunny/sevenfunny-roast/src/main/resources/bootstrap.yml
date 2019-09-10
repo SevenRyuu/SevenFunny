@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      name: roast
+      label: master
+      profile: dev
+      uri: http://localhost:8888/
+

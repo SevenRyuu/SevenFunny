@@ -19,6 +19,7 @@
         <module>sevenfunny-roast</module>
         <module>sevenfunny-manager</module>
         <module>sevenfunny-web</module>
+        <module>sevenfunny-config</module>
     </modules>
     <packaging>pom</packaging>
 
