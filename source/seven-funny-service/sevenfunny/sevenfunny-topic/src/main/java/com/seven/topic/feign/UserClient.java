@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * info   ：topic调用user
  */
 @FeignClient(value = "sevenfunny-user")
-public interface UserFeign {
+public interface UserClient {
 
     @RequestMapping(value = "/user/login/topicFeign",method = RequestMethod.GET)
-    public void testFeign(@RequestParam(value = "x") String x);
+    void testFeign(@RequestParam(value = "x") String x);
 }

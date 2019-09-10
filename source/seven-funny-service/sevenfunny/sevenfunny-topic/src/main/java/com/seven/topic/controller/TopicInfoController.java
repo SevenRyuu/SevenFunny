@@ -6,7 +6,7 @@ import com.seven.common.entity.PageResult;
 import com.seven.common.entity.ResultCode;
 import com.seven.common.entity.ResultResponse;
 import com.seven.topic.entity.TopicInfo;
-import com.seven.topic.feign.UserFeign;
+import com.seven.topic.feign.UserClient;
 import com.seven.topic.service.TopicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class TopicInfoController {
     private TopicInfoService topicInfoService;
 
     @Autowired
-    private UserFeign userFeign;
+    private UserClient userClient;
 
     /**
      * 创建话题
@@ -55,8 +55,12 @@ public class TopicInfoController {
         return new ResultResponse(ResultCode.SUCCESS, new PageResult<TopicInfo>(page.getTotal(), page.getResult()));
     }
 
+    /**
+     * 测试feign
+     * @param x
+     */
     @GetMapping(value = "/testFeign")
     public void testFeign(@RequestParam String x){
-        userFeign.testFeign(x);
+        userClient.testFeign(x);
     }
 }

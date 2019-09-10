@@ -33,6 +33,7 @@ public class UserInfoController {
     @Autowired
     private HttpServletRequest request;
 
+    @Autowired
     private RedisTemplate redisTemplate;
 
     /**
