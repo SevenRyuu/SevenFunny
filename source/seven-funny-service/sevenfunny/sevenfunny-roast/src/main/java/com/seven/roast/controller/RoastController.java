@@ -5,6 +5,7 @@ import com.seven.common.entity.ResultResponse;
 import com.seven.roast.entity.Roast;
 import com.seven.roast.service.RoastService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/roast")
+@RefreshScope
 public class RoastController {
 
     @Autowired

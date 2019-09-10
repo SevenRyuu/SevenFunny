@@ -8,6 +8,7 @@ import com.seven.user.service.UserInfoService;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/user")
+@RefreshScope
 public class UserInfoController {
 
     @Autowired

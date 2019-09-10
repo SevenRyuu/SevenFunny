@@ -9,10 +9,12 @@ import com.seven.topic.entity.TopicInfo;
 import com.seven.topic.feign.UserClient;
 import com.seven.topic.service.TopicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/topic")
+@RefreshScope
 public class TopicInfoController {
 
     @Autowired

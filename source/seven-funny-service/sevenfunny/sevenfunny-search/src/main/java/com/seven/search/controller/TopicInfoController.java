@@ -7,11 +7,13 @@ import com.seven.common.entity.ResultResponse;
 import com.seven.search.entity.TopicInfo;
 import com.seven.search.service.TopicInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/topic")
+@RefreshScope
 public class TopicInfoController {
 
     @Autowired

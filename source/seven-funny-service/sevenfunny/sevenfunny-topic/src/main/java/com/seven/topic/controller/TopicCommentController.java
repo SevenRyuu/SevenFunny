@@ -5,6 +5,7 @@ import com.seven.common.entity.ResultResponse;
 import com.seven.topic.entity.TopicComment;
 import com.seven.topic.service.TopicCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping ("/topic/comment")
+@RefreshScope
 public class TopicCommentController {
 
     @Autowired
