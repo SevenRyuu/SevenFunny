@@ -159,9 +159,10 @@ public class UserInfoController {
      * 测试topic feign
      * @param x
      */
-    @RequestMapping(value = "/login/topicFeign", method = RequestMethod.GET)
-    public void testTopicFeign(@RequestParam(value = "x") String x){
+    @GetMapping(value = "/topicFeign")
+    public ResultResponse testTopicFeign(@RequestParam(value = "x") String x){
         System.out.println(x);
+        return new ResultResponse(ResultCode.SUCCESS);
     }
 
     @PostMapping(value = "/getById")

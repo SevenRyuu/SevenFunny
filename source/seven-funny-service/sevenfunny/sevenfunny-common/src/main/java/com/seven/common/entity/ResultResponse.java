@@ -15,6 +15,9 @@ public class ResultResponse implements Serializable {
 
     private Object data;
 
+    public ResultResponse() {
+    }
+
     public ResultResponse(ResultCode resultCode, Object data) {
         this.code = resultCode.code();
         this.message = resultCode.message();
