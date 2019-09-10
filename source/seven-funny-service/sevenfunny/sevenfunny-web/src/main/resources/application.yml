@@ -1,0 +1,26 @@
+server:
+  port: 8768
+
+spring:
+  application:
+    name: sevenfunny-web
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  routes:
+    sevenfunny-user:
+      path: /u/**
+      serviceId: sevenfunny-user
+  sensitive-headers:
+
+jwt:
+  config:
+    key: test
+    #ttl: 360000
+    header: Authorization
+    tokenHead: "Bearer "
+

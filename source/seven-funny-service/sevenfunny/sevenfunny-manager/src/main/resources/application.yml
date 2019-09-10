@@ -1,0 +1,18 @@
+server:
+  port: 8767
+
+spring:
+  application:
+    name: sevenfunny-manager
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  routes:
+    sevenfunny-user:
+      path: /u/**
+      serviceId: sevenfunny-user
+

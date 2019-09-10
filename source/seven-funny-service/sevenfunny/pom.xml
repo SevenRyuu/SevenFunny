@@ -17,6 +17,8 @@
         <module>sevenfunny-search</module>
         <module>sevenfunny-mongodbtest</module>
         <module>sevenfunny-roast</module>
+        <module>sevenfunny-manager</module>
+        <module>sevenfunny-web</module>
     </modules>
     <packaging>pom</packaging>
 
