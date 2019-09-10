@@ -16,3 +16,7 @@ zuul:
       path: /u/**
       serviceId: sevenfunny-user
 
+
+  rabbitmq:
+   host: 192.168.0.200
+

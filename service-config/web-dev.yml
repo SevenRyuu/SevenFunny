@@ -5,6 +5,10 @@ spring:
   application:
     name: sevenfunny-web
 
+  
+  rabbitmq:
+   host: 192.168.0.200
+
 eureka:
   client:
     serviceUrl:
