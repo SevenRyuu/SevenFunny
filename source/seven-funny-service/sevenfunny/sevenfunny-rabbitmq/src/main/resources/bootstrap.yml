@@ -4,5 +4,5 @@ spring:
       name: rabbitmq
       label: master
       profile: dev
-      uri: http://localhost:8888/
-
+      #uri: http://localhost:8888/
+      uri: http://192.168.0.200:8888/
