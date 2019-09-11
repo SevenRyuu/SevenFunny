@@ -9,7 +9,8 @@ spring:
     config:
       server:
         git:
-         uri: https://github.com/SevenRyuu/SevenFunny/
+         #uri: https://github.com/SevenRyuu/SevenFunny/
+         uri: http://192.168.0.200:3000/SevenRyuu/SevenFunny/
          searchPaths: service-config
          username:
          password:
